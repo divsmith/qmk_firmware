@@ -34,7 +34,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      KC_ESC, LCTL_T(KC_A), LOPT_T(KC_S), LSFT_T(KC_D), LCMD_T(KC_F), KC_G,       KC_H, RCMD_T(KC_J), RSFT_T(KC_K), ROPT_T(KC_L), RCTL_T(KC_SCLN), KC_QUOT,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    MO(ARROW),          _______,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
+     KC_LSFT, LT(ARROW, KC_Z), KC_X, KC_C, KC_V, KC_B, _______,              _______,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                                     KC_LGUI, MO(MOVE), MO(SYMBOL),                        MT(MOD_HYPR, KC_SPC), KC_ENT, _______
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
