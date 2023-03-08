@@ -33,11 +33,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                               KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_DEL,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_ESC, LCTL_T(KC_A), LOPT_T(KC_S), LSFT_T(KC_D), LCMD_T(KC_F), KC_G,       KC_H, RCMD_T(KC_J), RSFT_T(KC_K), ROPT_T(KC_L), RCTL_T(KC_SCLN), KC_QUOT,
+     KC_ESC, LSFT_T(KC_A), LT(SYMBOL, KC_S),    KC_D,    KC_F,   KC_G,                KC_H,    KC_J,    KC_K,    KC_L,    RSFT_T(KC_SCLN), KC_QUOT,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      KC_LSFT, LT(ARROW, KC_Z), KC_X, KC_C, KC_V, KC_B, _______,              _______,  KC_N,    LT(MEDIA, KC_M),    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    KC_LGUI, LT(MOVE, KC_ESC), TT(SYMBOL),       MT(MOD_HYPR, KC_SPC), KC_ENT, _______
+                                    MO(MOVE), LT(SYMBOL, KC_ESC), MT(MOD_LGUI, KC_ESC),       MT(MOD_RGUI, KC_SPC), MT(MOD_HYPR, KC_ENT), _______
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 
