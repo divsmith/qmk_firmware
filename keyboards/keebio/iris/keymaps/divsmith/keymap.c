@@ -9,10 +9,10 @@
 
 // Tap Dance declarations
 enum {
-   TD_MINS_UNDS,
-   TD_EQL_PLUS,
    TD_LBRC,
    TD_RBRC,
+   TD_LPAREN_LT,
+   TD_RPAREN_GT,
    TH_MINS_UNDS,
    TH_EQL_PLUS,
 };
@@ -22,10 +22,11 @@ tap_dance_action_t tap_dance_actions[] = {
    // Tap once for minus, twice for underscore
    [TD_LBRC] = ACTION_TAP_DANCE_DOUBLE(KC_LEFT_CURLY_BRACE, KC_LEFT_BRACKET),
    [TD_RBRC] = ACTION_TAP_DANCE_DOUBLE(KC_RIGHT_CURLY_BRACE, KC_RIGHT_BRACKET),
+   [TD_LPAREN_LT] = ACTION_TAP_DANCE_DOUBLE(KC_LEFT_PAREN, KC_LEFT_ANGLE_BRACKET),
+   [TD_RPAREN_GT] = ACTION_TAP_DANCE_DOUBLE(KC_RIGHT_PAREN, KC_RIGHT_ANGLE_BRACKET),
    [TH_MINS_UNDS] = ACTION_TAP_DANCE_TAP_HOLD(KC_MINUS, KC_UNDERSCORE),
    [TH_EQL_PLUS] = ACTION_TAP_DANCE_TAP_HOLD(KC_EQUAL, KC_PLUS),
 };
-
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -47,7 +48,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
      _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                              KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, _______, _______, _______, _______, _______,                            _______, KC_BSLS, KC_LPRN, KC_RPRN, _______, _______,
+     _______, _______, _______, _______, _______, _______,                            _______, KC_BSLS, TD(TD_LPAREN_LT), TD(TD_RPAREN_GT), _______, _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      _______, KC_LSFT, _______, _______, _______, _______,                       TD(TH_MINS_UNDS), TD(TH_EQL_PLUS), TD(TD_LBRC), TD(TD_RBRC), KC_SCLN, KC_QUOT,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
