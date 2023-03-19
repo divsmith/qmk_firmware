@@ -15,6 +15,8 @@ enum custom_keycodes {
 enum {
    TD_MINS_UNDS,
    TD_EQL_PLUS,
+   TD_LBRC,
+   TD_RBRC,
 };
 
 // Tap Dance definitions
@@ -22,6 +24,8 @@ tap_dance_action_t tap_dance_actions[] = {
    // Tap once for minus, twice for underscore
    [TD_MINS_UNDS] = ACTION_TAP_DANCE_DOUBLE(KC_MINUS, KC_UNDERSCORE),
    [TD_EQL_PLUS] = ACTION_TAP_DANCE_DOUBLE(KC_EQUAL, KC_PLUS),
+   [TD_LBRC] = ACTION_TAP_DANCE_DOUBLE(KC_LEFT_CURLY_BRACE, KC_LEFT_BRACKET),
+   [TD_RBRC] = ACTION_TAP_DANCE_DOUBLE(KC_RIGHT_CURLY_BRACE, KC_RIGHT_BRACKET),
 };
 
 
@@ -45,9 +49,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
      _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                              KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, _______, _______, _______, _______, _______,                            _______, KC_BSLS, KC_LPRN, KC_RPRN, TD(TD_MINS_UNDS), TD(TD_EQL_PLUS),
+     _______, _______, _______, _______, _______, _______,                            _______, KC_BSLS, KC_LPRN, KC_RPRN, _______, _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, KC_LSFT, _______, _______, _______, _______,                            TD(TD_MINS_UNDS), TD(TD_EQL_PLUS), KC_LBRC, KC_RBRC, KC_SCLN, KC_QUOT,
+     _______, KC_LSFT, _______, _______, _______, _______,                       TD(TD_MINS_UNDS), TD(TD_EQL_PLUS), TD(TD_LBRC), TD(TD_RBRC), KC_SCLN, KC_QUOT,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      _______, _______, _______, _______, _______, _______, _______,          _______, _______, _______, KC_LT, KC_GT, _______, _______,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
