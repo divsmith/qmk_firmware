@@ -1,17 +1,11 @@
 #include QMK_KEYBOARD_H
 #include "features/achordion.h"
-
+#include "features/taphold.h"
 
 #define _QWERTY 0
 #define SYMBOL 1
 #define ARROW 2
 #define MEDIA 3
-
-typedef struct {
-    uint16_t tap;
-    uint16_t hold;
-    uint16_t held;
-} tap_dance_tap_hold_t;
 
 // Tap Dance declarations
 enum {
@@ -23,59 +17,9 @@ enum {
    TH_EQL_PLUS,
 };
 
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-   if(!process_achordion(keycode, record)) { return false; }
-
-   tap_dance_action_t *action;
-
-   switch (keycode) {
-      case TD(TH_MINS_UNDS):  // list all tap dance keycodes with tap-hold configurations
-      case TD(TH_EQL_PLUS):
-            action = &tap_dance_actions[TD_INDEX(keycode)];
-            if (!record->event.pressed && action->state.count && !action->state.finished) {
-                tap_dance_tap_hold_t *tap_hold = (tap_dance_tap_hold_t *)action->user_data;
-                tap_code16(tap_hold->tap);
-            }
-   }
-
-   return true;
-}
-
-void tap_dance_tap_hold_finished(tap_dance_state_t *state, void *user_data) {
-    tap_dance_tap_hold_t *tap_hold = (tap_dance_tap_hold_t *)user_data;
-
-    if (state->pressed) {
-        if (state->count == 1
-#ifndef PERMISSIVE_HOLD
-            && !state->interrupted
-#endif
-        ) {
-            register_code16(tap_hold->hold);
-            tap_hold->held = tap_hold->hold;
-        } else {
-            register_code16(tap_hold->tap);
-            tap_hold->held = tap_hold->tap;
-        }
-    }
-}
-
-void tap_dance_tap_hold_reset(tap_dance_state_t *state, void *user_data) {
-    tap_dance_tap_hold_t *tap_hold = (tap_dance_tap_hold_t *)user_data;
-
-    if (tap_hold->held) {
-        unregister_code16(tap_hold->held);
-        tap_hold->held = 0;
-    }
-}
-
-#define ACTION_TAP_DANCE_TAP_HOLD(tap, hold) \
-    { .fn = {NULL, tap_dance_tap_hold_finished, tap_dance_tap_hold_reset}, .user_data = (void *)&((tap_dance_tap_hold_t){tap, hold, 0}), }
-
 // Tap Dance definitions
 tap_dance_action_t tap_dance_actions[] = {
    // Tap once for minus, twice for underscore
-   [TD_MINS_UNDS] = ACTION_TAP_DANCE_DOUBLE(KC_MINUS, KC_UNDERSCORE),
-   [TD_EQL_PLUS] = ACTION_TAP_DANCE_DOUBLE(KC_EQUAL, KC_PLUS),
    [TD_LBRC] = ACTION_TAP_DANCE_DOUBLE(KC_LEFT_CURLY_BRACE, KC_LEFT_BRACKET),
    [TD_RBRC] = ACTION_TAP_DANCE_DOUBLE(KC_RIGHT_CURLY_BRACE, KC_RIGHT_BRACKET),
    [TH_MINS_UNDS] = ACTION_TAP_DANCE_TAP_HOLD(KC_MINUS, KC_UNDERSCORE),
@@ -141,6 +85,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   )
 };
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+   if(!process_achordion(keycode, record)) { return false; }
+
+   tap_dance_action_t *action;
+
+   switch (keycode) {
+      case TD(TH_MINS_UNDS):  // list all tap dance keycodes with tap-hold configurations
+      case TD(TH_EQL_PLUS):
+            action = &tap_dance_actions[TD_INDEX(keycode)];
+            if (!record->event.pressed && action->state.count && !action->state.finished) {
+                tap_dance_tap_hold_t *tap_hold = (tap_dance_tap_hold_t *)action->user_data;
+                tap_code16(tap_hold->tap);
+            }
+   }
+
+   return true;
+}
 
 void matrix_scan_user(void) {
    achordion_task();
