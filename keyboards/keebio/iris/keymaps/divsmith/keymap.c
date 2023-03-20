@@ -1,6 +1,7 @@
 #include QMK_KEYBOARD_H
 #include "features/achordion.h"
 #include "features/taphold.h"
+#include "features/doubletap-mod.h"
 
 #define _QWERTY 0
 #define SYMBOL 1
@@ -15,6 +16,7 @@ enum {
    TD_RPAREN_GT,
    TH_MINS_UNDS,
    TH_EQL_PLUS,
+   DOUBLETAP_MOD_TEST,
 };
 
 // Tap Dance definitions
@@ -26,6 +28,7 @@ tap_dance_action_t tap_dance_actions[] = {
    [TD_RPAREN_GT] = ACTION_TAP_DANCE_DOUBLE(KC_RIGHT_PAREN, KC_RIGHT_ANGLE_BRACKET),
    [TH_MINS_UNDS] = ACTION_TAP_DANCE_TAP_HOLD(KC_MINUS, KC_UNDERSCORE),
    [TH_EQL_PLUS] = ACTION_TAP_DANCE_TAP_HOLD(KC_EQUAL, KC_PLUS),
+   [DOUBLETAP_MOD_TEST] = ACTION_DOUBLE_TAP_HOLD_MODIFIER(KC_A, KC_B, KC_C)
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -40,7 +43,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      KC_LSFT, LOPT_T(KC_Z), KC_X, KC_C, LT(ARROW, KC_V), KC_B, TG(ARROW),      _______,  KC_N,    LT(MEDIA, KC_M),    KC_COMM, KC_DOT,  ROPT_T(KC_SLSH), KC_RSFT,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    _______, LT(SYMBOL, KC_ESC), _______,        MT(MOD_HYPR, KC_SPC), KC_ENT, _______
+                                    _______, LT(SYMBOL, KC_ESC), TD(DOUBLETAP_MOD_TEST),        MT(MOD_HYPR, KC_SPC), KC_ENT, _______
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
   
@@ -48,9 +51,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
      _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                              KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, _______, _______, _______, _______, _______,                            _______, KC_BSLS, TD(TD_LPAREN_LT), TD(TD_RPAREN_GT), _______, _______,
+     _______, _______, _______, _______, _______, _______,                            KC_UNDS, KC_BSLS, TD(TD_LPAREN_LT), TD(TD_RPAREN_GT), _______, _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, KC_LSFT, _______, _______, _______, _______,                       TD(TH_MINS_UNDS), TD(TH_EQL_PLUS), TD(TD_LBRC), TD(TD_RBRC), KC_SCLN, KC_QUOT,
+     _______, KC_LSFT, _______, _______, _______, _______,                            KC_MINS, TD(TH_EQL_PLUS), TD(TD_LBRC), TD(TD_RBRC), KC_SCLN, KC_QUOT,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      _______, _______, _______, _______, _______, _______, _______,          _______, _______, _______, KC_LT, KC_GT, _______, _______,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
