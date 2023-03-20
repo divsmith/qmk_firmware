@@ -12,12 +12,16 @@
 // Tap Dance declarations
 enum {
    TD_LBRC,
-   TD_RBRC,
+  TD_RBRC,
    TD_LPAREN_LT,
    TD_RPAREN_GT,
    TD_PIPE_BSLS,
+   TD_QUOTES,
+   TD_COLONS,
+
    TH_MINS_UNDS,
    TH_EQL_PLUS,
+
    SCLN_CLN_SHFT,
 };
 
@@ -29,6 +33,8 @@ tap_dance_action_t tap_dance_actions[] = {
    [TD_LPAREN_LT] = ACTION_TAP_DANCE_DOUBLE(KC_LEFT_PAREN, KC_LEFT_ANGLE_BRACKET),
    [TD_RPAREN_GT] = ACTION_TAP_DANCE_DOUBLE(KC_RIGHT_PAREN, KC_RIGHT_ANGLE_BRACKET),
    [TD_PIPE_BSLS] = ACTION_TAP_DANCE_DOUBLE(KC_PIPE, KC_BACKSLASH),
+   [TD_QUOTES] = ACTION_TAP_DANCE_DOUBLE(KC_DOUBLE_QUOTE, KC_QUOTE),
+   [TD_COLONS] = ACTION_TAP_DANCE_DOUBLE(KC_SCLN, KC_COLN),
 
    [TH_MINS_UNDS] = ACTION_TAP_DANCE_TAP_HOLD(KC_MINUS, KC_UNDERSCORE),
    [TH_EQL_PLUS] = ACTION_TAP_DANCE_TAP_HOLD(KC_EQUAL, KC_PLUS),
@@ -58,9 +64,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      _______, KC_EXLM, KC_AT, KC_HASH, KC_DOLLAR, KC_PERC,                            KC_CIRC, KC_AMPR, KC_ASTR, TD(TD_PIPE_BSLS), _______, _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, _______, TD(TD_LBRC), TD(TD_RBRC), KC_MINS, KC_UNDS,                    KC_SCLN, KC_QUOT, TD(TD_LPAREN_LT), TD(TD_RPAREN_GT), _______, _______,
+     _______, _______, TD(TD_LBRC), TD(TD_RBRC), KC_MINS, KC_UNDS,                    TD(TH_EQL_PLUS), TD(TD_COLONS), TD(TD_LPAREN_LT), TD(TD_RPAREN_GT), _______, _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, _______, _______, _______, _______, _______, _______,          _______, _______, KC_SCLN, KC_LT, KC_GT, _______, _______,
+     _______, _______, _______, _______, _______, _______, _______,          _______, _______, TD(TD_QUOTES), KC_LT, KC_GT, _______, _______,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                                     _______, _______, _______,                   _______, _______, _______
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
