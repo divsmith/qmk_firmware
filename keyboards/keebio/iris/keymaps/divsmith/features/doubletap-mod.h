@@ -31,10 +31,10 @@ void doubletap_mod_finished(tap_dance_state_t *state, void *user_data) {
             register_code16(config->tap);
             config->active = config->tap;
         } else {
-            // add_mods(config->modifier);
-            register_code16(config->modifier);
+            register_mods(MOD_BIT(config->modifier));
+            // register_code16(config->modifier);
             config->active = config->modifier;
-            // config->mod_active = true;
+            config->mod_active = true;
         }
     } else if (state->count == 2) {
         if (!state->interrupted) {
@@ -49,7 +49,7 @@ void doubletap_mod_reset(tap_dance_state_t *state, void *user_data) {
 
     if (config->active) {
         if (config->mod_active) {
-            del_mods(config->active);
+            unregister_mods(MOD_BIT(config->active));
             config->mod_active = false;
         } else {
             unregister_code16(config->active);
