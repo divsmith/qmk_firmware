@@ -27,7 +27,7 @@ void doubletap_mod_finished(tap_dance_state_t *state, void *user_data) {
     doubletap_mod_t *config = (doubletap_mod_t *)user_data;
 
     if (state->count == 1) {
-        if (state->interrupted || !state->pressed) {
+        if (!state->pressed) {
             register_code16(config->tap);
             config->active = config->tap;
         } else {
