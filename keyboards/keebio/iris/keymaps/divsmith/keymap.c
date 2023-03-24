@@ -19,7 +19,6 @@ enum {
    TD_QUOTES,
    TD_COLONS,
 
-   TH_MINS_UNDS,
    TH_EQL_PLUS,
    TH_BKSPC_DEL,
 
@@ -37,7 +36,6 @@ tap_dance_action_t tap_dance_actions[] = {
    [TD_QUOTES] = ACTION_TAP_DANCE_DOUBLE(KC_DOUBLE_QUOTE, KC_QUOTE),
    [TD_COLONS] = ACTION_TAP_DANCE_DOUBLE(KC_SCLN, KC_COLN),
 
-   [TH_MINS_UNDS] = ACTION_TAP_DANCE_TAP_HOLD(KC_MINUS, KC_UNDERSCORE),
    [TH_EQL_PLUS] = ACTION_TAP_DANCE_TAP_HOLD(KC_EQUAL, KC_PLUS),
    [TH_BKSPC_DEL] = ACTION_TAP_DANCE_TAP_HOLD(KC_BACKSPACE, KC_DELETE),
 
@@ -52,7 +50,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      KC_TAB,  KC_Q,    KC_W,    LT(NAV, KC_E),    KC_R,    KC_T,                      KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_DEL,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_LCTL, KC_A, KC_S, LSFT_T(KC_D), LGUI_T(KC_F), KC_G,                           KC_H,    RGUI_T(KC_J), RSFT_T(KC_K), KC_L, KC_SCLN, RCTL_T(KC_QUOT),
+     _______, LCTL_T(KC_A), KC_S, LSFT_T(KC_D), LGUI_T(KC_F), KC_G,                           KC_H,    RGUI_T(KC_J), RSFT_T(KC_K), KC_L, RCTL_T(KC_SCLN), KC_QUOT,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      KC_LSFT, LOPT_T(KC_Z), KC_X, KC_C, LT(ARROW, KC_V), KC_B, _______,      _______,  KC_N,    LT(MEDIA, KC_M),    KC_COMM, KC_DOT,  ROPT_T(KC_SLSH), KC_RSFT,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
@@ -123,8 +121,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
    tap_dance_action_t *action;
 
    switch (keycode) {
-      case TD(TH_MINS_UNDS):  // list all tap dance keycodes with tap-hold configurations
-      case TD(TH_EQL_PLUS):
+      case TD(TH_EQL_PLUS):  // list all tap dance keycodes with tap-hold configurations
+      case TD(TH_BKSPC_DEL):
             action = &tap_dance_actions[TD_INDEX(keycode)];
             if (!record->event.pressed && action->state.count && !action->state.finished) {
                 tap_dance_tap_hold_t *tap_hold = (tap_dance_tap_hold_t *)action->user_data;
@@ -137,7 +135,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
    switch (keycode) {
-      case TD(TH_MINS_UNDS):
       case TD(TH_EQL_PLUS):
          return 100;
       default:
