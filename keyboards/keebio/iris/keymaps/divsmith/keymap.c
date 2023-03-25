@@ -42,6 +42,32 @@ tap_dance_action_t tap_dance_actions[] = {
    [SCLN_CLN_SHFT] = ACTION_DOUBLE_TAP_HOLD_MODIFIER(KC_SEMICOLON, KC_COLON, KC_RIGHT_SHIFT),
 }; 
 
+// Combo definitions
+enum combos {
+   GH_A,
+   CAPS_WORD,
+   COMBO_LENGTH
+};
+uint16_t COMBO_LEN = COMBO_LENGTH;
+
+const uint16_t PROGMEM gh_combo[] = {KC_G, KC_H, COMBO_END};
+const uint16_t PROGMEM caps_word[] = {LSFT_T(KC_D), RSFT_T(KC_K), COMBO_END};
+
+combo_t key_combos[] = {
+   [GH_A] = COMBO(gh_combo, KC_A),
+   [CAPS_WORD] = COMBO_ACTION(caps_word)
+};
+
+void process_combo_event(uint16_t combo_index, bool pressed) {
+   switch(combo_index) {
+      case CAPS_WORD: 
+         if (pressed) {
+            caps_word_on();
+         }
+         break;
+   }
+}
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_QWERTY] = LAYOUT(
