@@ -81,7 +81,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      _______, LOPT_T(KC_Z), KC_X, KC_C, LT(ARROW, KC_V), KC_B, _______,      _______,  KC_N,    LT(MEDIA, KC_M),    KC_COMM, KC_DOT,  ROPT_T(KC_SLSH), _______,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    KC_TAB, LT(SYMBOL, KC_ESC), KC_ENTER,        MT(MOD_HYPR, KC_SPC), LT(NUM, KC_ENTER), TD(TH_BKSPC_DEL)
+                                    KC_TAB, LT(SYMBOL, KC_ESC), TD(TH_BKSPC_DEL),        MT(MOD_HYPR, KC_SPC), LT(NUM, KC_ENTER), _______
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 
